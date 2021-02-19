@@ -1,26 +1,26 @@
-let cards = document.querySelectorAll('.card-box');
+let cards = document.querySelectorAll('.card');
 
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
-let countpairs = document.querySelector('.inpt');
+let menu = document.querySelector('.section-menu')
 let countFlipCard = 4;
-let cardContainer = document.querySelector('.container');
+let cardWrapper = document.querySelector('.card-wrapper');
 
 function createCard(num) {
-  let cardBox = document.createElement('div');
+  let newCard = document.createElement('div');
   let frontFace = document.createElement('span');
-  let backFase = document.createElement('img');
-  cardBox.classList.add('card-box');
-  cardBox.setAttribute('data-name', num);
+  let backFace = document.createElement('img');
+  newCard.classList.add('card');
+  newCard.setAttribute('data-name', num);
   frontFace.classList.add('front-face');
   frontFace.innerText = num;
-  backFase.classList.add('back-face');
-  backFase.src = "img/js-badge.svg";
-  backFase.alt = "Memory Card";
-  cardBox.append(frontFace);
-  cardBox.append(backFase);
-  cardContainer.append(cardBox);
+  backFace.classList.add('back-face');
+  backFace.src = "img/js-badge.svg";
+  backFace.alt = "Memory Card";
+  newCard.append(frontFace);
+  newCard.append(backFace);
+  cardWrapper.append(newCard);
 
 }
 function addCards(cardArr) {
@@ -30,12 +30,15 @@ function addCards(cardArr) {
   cardArr.forEach(function(number) {
     createCard(number)
   });
-  cards = document.querySelectorAll('.card-box');
+  cards = document.querySelectorAll('.card');
 }
 
 
 function pageReset () {
-  cardContainer.innerHTML = '';
+  menu.style.display = 'none';
+  let countPairs = document.querySelector('.inpt');
+  countFlipCard = parseInt(countPairs.value);
+  cardWrapper.innerHTML = '';
   const pairsAr  = Array.from({length: countFlipCard}, (v, k) => k+1);
   addCards(pairsAr);
   btnReset.textContent = 'Сыграть еще раз!';
@@ -44,8 +47,6 @@ function pageReset () {
   }
   shuffle();
   cards.forEach(card => card.addEventListener('click', flipCard));
-  countFlipCard = parseInt(countpairs.value);
-  console.log(pairsAr)
 }
 
 let btnReset = document.querySelector('.btn');
@@ -79,7 +80,7 @@ function disableCards() {
   firstCard.removeEventListener('click', flipCard);
   secondCard.removeEventListener('click', flipCard);
   countFlipCard -=1 ;
-  if (countFlipCard == 0 ) btnReset.style.display = 'block';
+  if (countFlipCard == 0 ) menu.style.display = 'block';
   resetBoard();
 }
 
@@ -104,13 +105,17 @@ function resetBoard() {
 
 function shuffle() {
   cards.forEach(card => {
-    let ramdomPos = Math.floor(Math.random() * 16);
-    card.style.order = ramdomPos;
+    let randomPos = Math.floor(Math.random() * 16);
+    card.style.order = randomPos;
   });
 }
 
 (function gameTime() {
-  setTimeout('alert("прошла минута")', 60000);
+  setTimeout(() => {
+    menu.style.display = 'block';
+    menu.style.backgroundColor = "#AA0000";
+
+  }, 60000);
 })();
 
 cards.forEach(card => card.addEventListener('click', flipCard));
