@@ -1,0 +1,103 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  background: #060AB2;
+}
+.section-game{
+  position: absolute;
+  margin: 0 auto;
+  padding-top: 15%;
+  border: 1px solid white;
+}
+.container {
+  width: 640px;
+  height: 640px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  perspective: 1000px;
+  z-index:  -100;
+}
+
+.card-box {
+  width: calc(25% - 10px);
+  height: calc(25% - 10px);
+  margin: 5px;
+  position: relative;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+  transition: all .5s;
+  transform-style: preserve-3d;
+  transform: scale(1);
+}
+
+.card-box.flip {
+  transform: rotateY(180deg);
+}
+
+.card-box:active {
+  transform: scale(0.97);
+  transition: transform .2s;
+}
+
+.front-face,
+.back-face {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  backface-visibility: hidden;
+  border-radius: 5px;
+  background: #1C7CCC;
+}
+
+.front-face {
+  text-align: center;
+  font-size: 48px;
+  font-family: "Gilroy";
+  color: rgb(234, 234, 234);
+  transform: rotateY(180deg);
+}
+.over-box{
+  text-align: center;
+}
+.input-text{
+  display: inline-block;
+}
+
+
+.btn,
+.btn:active,
+.btn:focus {
+outline: none !important;
+}
+
+.btn{
+display: block ;
+margin-top: 50px;
+padding: 10px;
+border-radius: 10px;
+background: #1C7CCC;
+border: #1C7CCC;
+cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.section-menu{
+  margin: 0 auto;
+  padding-top: 15%;
+  border: 1px solid red;
+  z-index: 100;
+}
