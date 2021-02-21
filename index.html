@@ -1,51 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Игра "Найди пару"</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="./custom.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles.css">
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script> -->
+
     <script defer src="./scripts.js"></script>
-  </head>
-  <body>
-    <div class="d-flex h-100 ">
-      <div class="_settings-col d-flex align-items-center">
+</head>
+<body>
+<div class="d-flex h-100 ">
+    <div class="_settings-col d-flex align-items-center">
         <div class="settings__wrapper">
-          <h3>Настройки игрового поля</h3>
-          <form id="settings-form">
-            <div class="mb-3">
-              <label for="cells-num" class="form-label">Выберите число карточек по вертикали/горизонтали</label>
-              <input
-                id="cells-num"
-                type="number"
-                class="form-control"
-                value="4"
-                min="2"
-                max="10"
-                step="2"
-                required
-              >
-            </div>
+            <h3>Настройки игрового поля</h3>
+            <form id="settings-form">
+                <div class="mb-3">
+                    <label for="cells-num" class="form-label">Выберите число карточек по вертикали/горизонтали</label>
+                    <input
+                            id="cells-num"
+                            type="number"
+                            class="form-control"
+                            value="4"
+                            min="2"
+                            max="10"
+                            step="2"
+                            required
+                    >
+                </div>
 
-            <button class="btn btn-primary" id="start-game-btn">Старт</button>
-          </form>
+                <button class="btn btn-primary" id="start-game-btn">Старт</button>
+            </form>
         </div>
-      </div>
+    </div>
 
-      <div
-        class="
+    <div
+            class="
           _game-area-col d-flex w-100
           align-items-center justify-content-center
         "
-      >
+    >
         <div class="game-area" id="game-area"></div>
-      </div>
-
     </div>
-  </body>
+
+</div>
+</body>
 </html>

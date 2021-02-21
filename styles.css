@@ -1,34 +1,30 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+html, body {
+    min-height: 100%;
+    height: 100%;
 }
 
-body {
-  position: relative;
-  height: 100vh;
-  display: flex;
-  background: #060AB2;
+._settings-col,
+._game-area-col {
+  padding: 20px;
 }
-.section-game{
-  position: absolute;
-  margin: 0 auto;
-  padding-top: 15%;
-  border: 1px solid white;
+
+._settings-col {
+  background-color: #ccc;
 }
-.card-wrapper {
-  width: 640px;
-  height: 640px;
-  margin: 0 auto;
+
+._game-area-col {
+  background-color: #ebebeb;
+}
+
+.game-area{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   perspective: 1000px;
-  z-index:  -100;
 }
 
-.card {
+.game-area .game-card {
   width: 100px;
   height: 100px;
   margin: 5px;
@@ -37,71 +33,35 @@ body {
   transition: all .5s;
   transform-style: preserve-3d;
   transform: scale(1);
+  border-radius: 5px;
 }
 
-.card.flip {
+.game-area .game-card.flip {
   transform: rotateY(180deg);
 }
 
-.card:active {
+.game-area .game-card:active {
   transform: scale(0.97);
   transition: transform .2s;
 }
 
-.front-face,
-.back-face {
+.game-area .front-face,
+.game-area .back-face {
   width: 100%;
   height: 100%;
   padding: 20px;
   position: absolute;
   backface-visibility: hidden;
-  border-radius: 5px;
   background: #1C7CCC;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.front-face {
-  text-align: center;
+.game-area .front-face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 48px;
-  font-family: "Gilroy";
   color: rgb(234, 234, 234);
   transform: rotateY(180deg);
-}
-
-
-
-.btn,
-.btn:active,
-.btn:focus {
-outline: none !important;
-}
-
-.btn{
-display: block ;
-margin-top: 50px;
-padding: 10px;
-border-radius: 10px;
-background: #1C7CCC;
-border: #1C7CCC;
-cursor: pointer;
-}
-
-.btn:hover {
-  background-color: #4CAF50; /* Green */
-  color: white;
-}
-
-.section-menu{
-  margin: 0 auto;
-  height: 100%;
-  width: 100%;
-  padding-top: 15%;
-  text-align: center;
-  border: 1px solid red;
-  z-index: 100;
-}
-.game-menu{
-  text-align: center;
-}
-.input-text{
-  display: inline-block;
 }
