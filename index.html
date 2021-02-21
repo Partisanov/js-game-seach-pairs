@@ -17,20 +17,34 @@
       <div class="_settings-col d-flex align-items-center">
         <div class="setttings__wrapper">
           <h3>Настройки игрового поля</h3>
-          <form>
+          <form id="settings-form">
             <div class="mb-3">
               <label for="cells-num" class="form-label">Выберите число пар</label>
-              <input id="cells-num" type="number" class="form-control" value = "4" min="2" max="10">
+              <input
+                id="cells-num"
+                type="number"
+                class="form-control"
+                value="4"
+                min="6"
+                max="10"
+                required
+              >
             </div>
 
-            <button class="btn btn-primary" >Старт</button>
+            <button class="btn btn-primary" id="start-game-btn">Старт</button>
           </form>
         </div>
       </div>
 
-      <div class="_game-area-col d-flex w-100 align-items-center">
-        <div id="game-area"></div>
+      <div
+        class="
+          _game-area-col d-flex w-100
+          align-items-center justify-content-center
+        "
+      >
+        <div class="game-area" id="game-area"></div>
       </div>
+
     </div>
   </body>
 </html>

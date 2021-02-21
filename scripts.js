@@ -1,3 +1,133 @@
+/* Глобальные настройки и узлы приложения */
+// форма настроек игрового поля
+const settingsForm = document.getElementById('settings-form');
+// поле с количеством пар
+const pairsNumField = document.getElementById('cells-num');
+// игровое поле
+const gameArea = document.getElementById('game-area');
+// кнопка запуска игры
+const startBtn = document.getElementById('start-game-btn');
+
+// шаблон для игровой костяшки
+const cardTemplate = `
+  <div class='game-card' data-name='##NUM##'>
+    <span class='front-face'>##NUM##</span>
+    <img class='back-face' src='img/js-badge.svg' alt='Memory Card'>
+  </div>
+`;
+
+// переменная для игровых карточек текущей игры (DOM-элементы)
+let gameCards = [];
+/*****************************************/
+
+// инициализация игры
+function initGame() {
+  // количество пар костяшек
+  const pairsNum = pairsNumField.value;
+
+  // сбрасываем игровое поле к начальному состоянию
+  resetGame();
+  // устанавливаем ширину игрового поля в зависимости от количества
+  // костяшек
+  setGameAreaWidth(pairsNum);
+  // заполняем игровое поле костяшками
+  fillGameAreaWithPairs(pairsNum);
+  // перемешиваем карточки
+  shuffleCards();
+
+  // навешиваем события на костяшки
+  gameCards.forEach( card => {
+    card.addEventListener('click', e => {
+      flipCard(card);
+    });
+  });
+}
+
+// рандомное перемешивание костяшек игрового поля
+function shuffleCards() {
+  // количество игровых костяшек
+  const cardsNum = gameCards.length;
+  gameCards.forEach( card => {
+    console.log(card);
+    const randomPos = Math.floor( Math.random() * cardsNum);
+    card.style.order = randomPos;
+  });
+}
+
+// переворачивание карточки card
+function flipCard(card) {
+  // добавляем класс состояния перевёрнутой карточки
+  card.classList.add('flip');
+
+
+}
+
+// устанавливаем ширину игрового поля в зависимости от количества
+// костяшек
+function setGameAreaWidth(pairsNum) {
+  // количество костяшек в одной строке
+  const cardsPerRow = Math.ceil(pairsNum / 2);
+
+  // отступы по бокам от карточки
+  const cardSideMargin = 5;
+  // размер одной костяшки
+  const cardWidth = 100;
+  // общий размер костяшки
+  const cardFullWidth = cardWidth + (cardSideMargin * 2);
+
+  // считаем размер игрового поля
+  const gameAreaWidth = cardFullWidth * cardsPerRow;
+  // устанавливаем ширину игрового поля
+  gameArea.style.width = gameAreaWidth + 'px';
+}
+
+// заполнение игрового поля парами костяшек
+// pairsNum - количество пар костяшек
+function fillGameAreaWithPairs(pairsNum) {
+  while(pairsNum) {
+    // добавляем пару карточек на игровое поле
+    addCardsPairToField(pairsNum);
+    pairsNum--;
+  }
+
+  // сохраняем карточки игрового поля в глобальную переменную
+  gameCards = gameArea.querySelectorAll('.game-card');
+}
+
+// добавление пары карточек на игровое поле
+// cardValue - цифра/число на костяшке
+function addCardsPairToField(cardValue) {
+  // создаём пару карточек в игровом поле
+  createCard(cardValue);
+  createCard(cardValue);
+}
+
+// создаём косятшку с номером num для игрового поля
+function createCard(num) {
+  const card = cardTemplate.replaceAll('##NUM##', num);
+  gameArea.insertAdjacentHTML('beforeend', card);
+}
+
+// сброс игрового поля к начальному состоянию
+function resetGame() {
+  // удаляем все костяшки
+  gameArea.innerHTML = '';
+  // сброс ширины игрового поля
+  gameArea.style.width = '';
+  // удаляем все костяшки текущей игры
+  gameCards = [];
+}
+
+// навешиваем хендлеры при загрузке документа
+window.addEventListener('load', () => {
+  settingsForm.addEventListener('submit', e => {
+    // отключаем нативное поведение, чтобы форма не отправлялась
+    e.preventDefault();
+    // инициализируем игровое поле
+    initGame();
+  });
+});
+
 let cards = document.querySelectorAll('.card');
 
 let hasFlippedCard = false;
@@ -5,24 +135,7 @@ let lockBoard = false;
 let firstCard, secondCard;
 let menu = document.querySelector('.section-menu')
 let countFlipCard = 4;
-let cardWrapper = document.querySelector('.card-wrapper');
 
-function createCard(num) {
-  let newCard = document.createElement('div');
-  let frontFace = document.createElement('span');
-  let backFace = document.createElement('img');
-  newCard.classList.add('card');
-  newCard.setAttribute('data-name', num);
-  frontFace.classList.add('front-face');
-  frontFace.innerText = num;
-  backFace.classList.add('back-face');
-  backFace.src = "img/js-badge.svg";
-  backFace.alt = "Memory Card";
-  newCard.append(frontFace);
-  newCard.append(backFace);
-  cardWrapper.append(newCard);
-
-}
 function addCards(cardArr) {
   cardArr.forEach(function(number) {
     createCard(number)
@@ -49,26 +162,26 @@ function pageReset () {
   cards.forEach(card => card.addEventListener('click', flipCard));
 }
 
-let btnReset = document.querySelector('.btn');
-btnReset.addEventListener("click", pageReset);
+// let btnReset = document.querySelector('.btn');
+// btnReset.addEventListener("click", pageReset);
 
-function flipCard() {
-  if (lockBoard) return;
-  if (this === firstCard) return;
-
-  this.classList.add('flip');
-
-  if (!hasFlippedCard) {
-    hasFlippedCard = true;
-    firstCard = this;
-    return;
-  }
-
-  secondCard = this;
-  lockBoard = true;
-
-  checkForMatch();
-}
+// function flipCard() {
+//   if (lockBoard) return;
+//   if (this === firstCard) return;
+//
+//   this.classList.add('flip');
+//
+//   if (!hasFlippedCard) {
+//     hasFlippedCard = true;
+//     firstCard = this;
+//     return;
+//   }
+//
+//   secondCard = this;
+//   lockBoard = true;
+//
+//   checkForMatch();
+// }
 
 function checkForMatch() {
   let isMatch = firstCard.dataset.name === secondCard.dataset.name;
@@ -103,20 +216,11 @@ function resetBoard() {
   secondCard = null;
 }
 
-function shuffle() {
-  cards.forEach(card => {
-    let randomPos = Math.floor(Math.random() * 16);
-    card.style.order = randomPos;
-  });
-}
+// (function gameTime() {
+//   setTimeout(() => {
+//     menu.style.display = 'block';
+//     menu.style.backgroundColor = "#AA0000";
+//
+//   }, 60000);
+// })();
 
-(function gameTime() {
-  setTimeout(() => {
-    menu.style.display = 'block';
-    menu.style.backgroundColor = "#AA0000";
-
-  }, 60000);
-})();
-
-cards.forEach(card => card.addEventListener('click', flipCard));
-window.onload = shuffle;
