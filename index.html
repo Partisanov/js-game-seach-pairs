@@ -15,18 +15,19 @@
   <body>
     <div class="d-flex h-100 ">
       <div class="_settings-col d-flex align-items-center">
-        <div class="setttings__wrapper">
+        <div class="settings__wrapper">
           <h3>Настройки игрового поля</h3>
           <form id="settings-form">
             <div class="mb-3">
-              <label for="cells-num" class="form-label">Выберите число пар</label>
+              <label for="cells-num" class="form-label">Выберите число карточек по вертикали/горизонтали</label>
               <input
                 id="cells-num"
                 type="number"
                 class="form-control"
                 value="4"
-                min="6"
+                min="2"
                 max="10"
+                step="2"
                 required
               >
             </div>
