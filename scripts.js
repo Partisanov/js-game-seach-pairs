@@ -23,7 +23,7 @@ let gameCards = [];
 // инициализация игры
 function initGame() {
   // количество пар костяшек
-  const pairsNum = pairsNumField.value;
+  const pairsNum = (pairsNumField.value ** 2)/2;
 
   // сбрасываем игровое поле к начальному состоянию
   resetGame();
@@ -66,7 +66,7 @@ function flipCard(card) {
 // костяшек
 function setGameAreaWidth(pairsNum) {
   // количество костяшек в одной строке
-  const cardsPerRow = Math.ceil(pairsNum / 2);
+  const cardsPerRow = pairsNumField.value;
 
   // отступы по бокам от карточки
   const cardSideMargin = 5;
